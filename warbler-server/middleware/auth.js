@@ -10,8 +10,22 @@ const jwt = require("jsonwebtoken");
 // this is the idea of Authentication
 exports.loginRequired = function(req, res, next) {
     // try to get the token from a http header
-    const token = req.headers.authorization.split(" ")[1]; // Bearer then a space then token
-    
+    try {
+      const token = req.headers.authorization.split(" ")[1]; // Bearer then a space then token
+      // decode that token
+      // decoded is payload
+      jwt.verify(token, process.env.SECRET_KEY, fucntion(err, decoded) {
+          // if payload exists
+          if(decoded) {
+              // if successfully decoded this token then we're done return next()
+              return next();
+          }
+      });
+      
+      
+    } catch (e) {
+        
+    }
 };
 
 
