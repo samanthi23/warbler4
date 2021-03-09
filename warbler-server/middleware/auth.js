@@ -18,13 +18,20 @@ exports.loginRequired = function(req, res, next) {
           // if payload exists
           if(decoded) {
               // if successfully decoded this token then we're done return next()
-              return next();
+              return next({
+                status: 401,
+                message: "Please log in first"
+              });
           }
       });
       
       
     } catch (e) {
-        
+        return next({
+            status: 401,
+                message: "Please log in first"
+             
+        });
     }
 };
 
